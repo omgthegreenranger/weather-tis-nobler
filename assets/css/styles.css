@@ -1,1 +1,12 @@
 
+#searchModal {
+    position: fixed;
+}
+
+.result {
+    background-color: blue;
+}
+.result:nth-child(even) {
+    background-color:grey;
+
+}

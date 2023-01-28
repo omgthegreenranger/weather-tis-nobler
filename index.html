@@ -12,19 +12,30 @@
     <header>
         <h1>Weather, Tis Nobler in the Mind to Suffer?</h1>
     </header>
-    <main>
-        <section>
-            <article>Search Box</article>
-            <article>Location Select</article>
+    <main class="container row">
+        <section class="container col cols-3" id="left-block">
+            <article class="col cols-3">
+                <input type="search" name="City" id="city-name">
+                <button type="button" class="btn btn-primary" id="city-submit" name="Submit" data-toggle="modal" data-target="#searchModal">Search</button>
+                <!-- Modal for search results if looking for a city? -->
+            </article>
+            <article class="row row-cols-3">Location Select</article>
         </section>
-        <section>Main Board
-
+        <section class="container col cols-8" id="main-block">
+            <article class="row row-cols-8">City Right Now</article>
+            <article class="row row-cols-8">5-day Forecast</article>
         </section>
+        <section id="results-box">
+            
+        </section>
+        <!-- <div class="modal fade" id="searchModal" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">Hello!</div>
+        </div> -->
     </main>
 
-
 </body>
--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="./assets/scripts/scripts.js"></script>
 
 </html>
