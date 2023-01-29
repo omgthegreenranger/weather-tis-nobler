@@ -5,33 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather, Tis Nobler in the Mind to Suffer?</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link ref="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
     <header>
         <h1>Weather, Tis Nobler in the Mind to Suffer?</h1>
     </header>
     <main class="container row">
-        <section class="container col cols-3" id="left-block">
-            <article class="col cols-3">
+        <section class="col" id="left-block">
+            <article class="col">
                 <input type="search" name="City" id="city-name">
                 <button type="button" class="btn btn-primary" id="city-submit" name="Submit" data-toggle="modal" data-target="#searchModal">Search</button>
                 <!-- Modal for search results if looking for a city? -->
             </article>
-            <article class="row row-cols-3"></article>
+            <article id="history" class="col"></article>
         </section>
-        <section class="container col cols-8" id="main-block">
-            <article id="current-temp" class="row row-cols-8">
+        <section class="col" id="main-block">
+            <article id="current-temp" class="row">
             </article>
-            <article id="future-temp" class="row row-cols-8">5-day Forecast</article>
+            <article id="future-temp" class="row"></article>
         </section>
         <section id="results-box">
             
         </section>
-        <!-- <div class="modal fade" id="searchModal" role="dialog" aria-hidden="true">
+        <div class="modal fade" id="searchModal" role="dialog" aria-hidden="true">
             <div class="modal-dialog" role="document">Hello!</div>
-        </div> -->
+        </div>
     </main>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>

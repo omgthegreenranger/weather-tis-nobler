@@ -81,40 +81,46 @@ function deployWeathersNow(weathersNow) {
     <div id="climate"><span id="skies-now">${skiesNow}</span></div>`
 
 }
-let dayTime = ''
+
+//weathersToCome - pulled from OpenWeatherMap - must be dayjs converted
+// tomorrow - today + 1 day
+// fiveDays = dayjs five days from tomorrow
+
+let dayTime = '';
 let forecastFive = [];
+let forecastFiveGlobe = [];
+let tomorrow = '';
 function deployWeathersToCome(weathersToCome) {
-    console.log(weathersToCome);
-    dayTime = weathersToCome['list'][0]['dt'];
-    console.log(dayTime);
+    // dayTime = weathersToCome['list'];
+
     nowTime = dayjs();
-    tomorrow = nowTime.add(1, 'day').set('hour', 9).set('minute', 00).set('second', 00);
+    tomorrow = nowTime.add(1, 'day').set('hour', 10).set('minute', 00).set('second', 00).tz("America/Toronto");
     let fiveDays = [];
-    let fiveStamps = [];
     let forecastFive = [];
     for (i = 0; i < 5; i++) {
-        fiveDays.push(tomorrow.add([i], 'day').add(5,'hour'));
-        fiveStamps.push(dayjs(tomorrow.add([i], 'day').add(5, 'hour')).unix());
+        fiveDays.push(tomorrow.add([i], 'day'));
     }
-    console.log(tomorrow);
-    console.log(fiveDays);
-    console.log(fiveStamps);
-
     for (i = 0; i < weathersToCome['list'].length; i++) {
-        // console.log("Yes!" + weathersToCome['list'][i]['dt'])
-        for (j = 0; j < fiveStamps.length; j++) {
-            if (fiveStamps[i] == weathersToCome['list'][i]['dt']) {
-                console.log("Yes!")
+        dayTime = dayjs.unix(weathersToCome['list'][i]['dt']).format("MM-DD-YYYY hh:mm A");
+        for (j = 0; j < fiveDays.length; j++) {
+            if (fiveDays[j].format("MM-DD-YYYY hh:mm A") == dayTime) {
                 forecastFive.push(weathersToCome['list'][i]);
-            } else {
-                console.log("No this didn't work.");
-                console.log(weathersToCome['list'][i]['dt']);
-            };
+            }
         };
     };
-    console.log(forecastFive);
+    for (i = 0; i < forecastFive.length; i++) {
+        console.log(forecastFive);
+        forecastDate = dayjs.unix(forecastFive[i]['dt']).format("MMM DD, YYYY");
+        forecastTemp = forecastFive[i]['main']['temp'];
+        forecastSkies = forecastFive[i]['weather'][0]['main'];
+        forecastWind = forecastFive[i]['wind']['speed'];
+        forecastFeels = forecastFive[i]['main']['feels_like'];
+        forecastHumidity = forecastFive[i]['main']['humidity'];
+        document.querySelector('#future-temp').innerHTML += `<div class="forecastBox col cols-2"><div class="future-date">${forecastDate}</div><div class="future-skies">${forecastSkies}</div><div class="future-temp">${forecastTemp}</div><div class="future-wind">${forecastWind}<span class="future-feels">Feels like ${forecastFeels}</span></div><div class="future-humidity">${forecastHumidity}</div></div>`
+        // console.log("This works!");
+        // console.log(forecastSkies);
+    }
 };
-
 resultsBox.addEventListener('click', function(event) {
     weatherFetched = event.target;
     resultsBox.innerHTML = "";
