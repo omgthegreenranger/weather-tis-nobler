@@ -63,27 +63,57 @@ function weatherFetch () {
     weatherNowFetchUrl = openWeatherUrl + weatherNowUrl + "lat=" + weatherLat + "&lon=" + weatherLon + "&appid=" + apiKey;
     fetch(weatherFetchUrl)
         .then((response) => response.json())
-        .then((data) => weathersToCome.push(data));
+        .then((data) => deployWeathersToCome(data));
     
     fetch(weatherNowFetchUrl)
         .then((response) => response.json())
-        .then((data) => weathersNow.push(data));
-
-    deployWeathersNow();
-    deployWeathersToCome();
+        .then((data) => deployWeathersNow(data));
 
 }
 
-function deployWeathersNow() {
-    console.log(weathersNow);
-    nameCity = weathersNow[0]["dt"];
+function deployWeathersNow(weathersNow) {
+    let city = weathersNow['name'];
+    let nowTemp = weathersNow['main']['temp'];
+    let skiesNow = weathersNow['weather'][0]['main'];
+    let feelsLike = weathersNow['main']['feels_like'];
+    document.querySelector('#current-temp').innerHTML = `<div id="current-city">${city}</div>
+    <div id="temps"><span id='now-temp'>${nowTemp}</span><span id="feels-like">${feelsLike}</span></div>
+    <div id="climate"><span id="skies-now">${skiesNow}</span></div>`
 
 }
-
-function deployWeathersToCome() {
-    // console.log("To Come Works!")
+let dayTime = ''
+let forecastFive = [];
+function deployWeathersToCome(weathersToCome) {
     console.log(weathersToCome);
-}
+    dayTime = weathersToCome['list'][0]['dt'];
+    console.log(dayTime);
+    nowTime = dayjs();
+    tomorrow = nowTime.add(1, 'day').set('hour', 9).set('minute', 00).set('second', 00);
+    let fiveDays = [];
+    let fiveStamps = [];
+    let forecastFive = [];
+    for (i = 0; i < 5; i++) {
+        fiveDays.push(tomorrow.add([i], 'day').add(5,'hour'));
+        fiveStamps.push(dayjs(tomorrow.add([i], 'day').add(5, 'hour')).unix());
+    }
+    console.log(tomorrow);
+    console.log(fiveDays);
+    console.log(fiveStamps);
+
+    for (i = 0; i < weathersToCome['list'].length; i++) {
+        // console.log("Yes!" + weathersToCome['list'][i]['dt'])
+        for (j = 0; j < fiveStamps.length; j++) {
+            if (fiveStamps[i] == weathersToCome['list'][i]['dt']) {
+                console.log("Yes!")
+                forecastFive.push(weathersToCome['list'][i]);
+            } else {
+                console.log("No this didn't work.");
+                console.log(weathersToCome['list'][i]['dt']);
+            };
+        };
+    };
+    console.log(forecastFive);
+};
 
 resultsBox.addEventListener('click', function(event) {
     weatherFetched = event.target;
@@ -97,7 +127,5 @@ searchBtn.addEventListener('click',function () {
     resultsBox.innerHTML = "";
     geoFetch(searchTerm);
 })
-
-
 
 
