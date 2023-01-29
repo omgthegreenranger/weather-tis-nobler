@@ -50,10 +50,19 @@ function modalDisplay(searched) {
         cityCountry = searched[i]['country'];
         cityCoordLon = searched[i]['lon'];
         cityCoordLat = searched[i]['lat'];
-        resultsBox.innerHTML += `<div class="result-details"><ul class="results">
-        <li class="city primary">City: ${cityName}</li><li class="city primary">Province: ${cityState}</li><li class="city secondary">Country: ${cityCountry}</li><li class="city secondary">Lattitude: ${cityCoordLat}</li><li class="city second">Longitude: ${cityCoordLon}</li></div>`;
+        resultsBox.innerHTML += `<div class="result-details"  data-bs-toggle="modal" data-bs-target="#searchModal"><ul class="results list-group">
+        <li class="city primary list-group-item">City: ${cityName}</li><li class="city list-group-item">Province: ${cityState}</li><li class="city secondary list-group-item">Country: ${cityCountry}</li><li class="city secondary list-group-item">Lattitude: ${cityCoordLat}</li><li class="city secondary list-group-item">Longitude: ${cityCoordLon}</li><button type="button" class="citySelect btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>`;
     };
-
+    let selectBtn = document.querySelector('.citySelect');
+    selectBtn.addEventListener('click', function(event) {
+        // $('#results-box').click(function(event) { 
+            weatherFetched = event.target.parent();
+            $("#searchModal").modal('hide');
+            console.log(weatherFetched);
+            // resultsBox.innerHTML = "";
+            weatherFetch();
+            })
+        
 };
 
 function weatherFetch () {
@@ -90,6 +99,7 @@ let dayTime = '';
 let forecastFive = [];
 let forecastFiveGlobe = [];
 let tomorrow = '';
+
 function deployWeathersToCome(weathersToCome) {
     // dayTime = weathersToCome['list'];
 
@@ -117,15 +127,19 @@ function deployWeathersToCome(weathersToCome) {
         forecastFeels = forecastFive[i]['main']['feels_like'];
         forecastHumidity = forecastFive[i]['main']['humidity'];
         document.querySelector('#future-temp').innerHTML += `<div class="forecastBox col cols-2"><div class="future-date">${forecastDate}</div><div class="future-skies">${forecastSkies}</div><div class="future-temp">${forecastTemp}</div><div class="future-wind">${forecastWind}<span class="future-feels">Feels like ${forecastFeels}</span></div><div class="future-humidity">${forecastHumidity}</div></div>`
-        // console.log("This works!");
-        // console.log(forecastSkies);
     }
 };
-resultsBox.addEventListener('click', function(event) {
-    weatherFetched = event.target;
-    resultsBox.innerHTML = "";
-    weatherFetch();
-})
+
+// selectBtn.addEventListener('click', function(event) {
+// // $('#results-box').click(function(event) { 
+//     weatherFetched = event.target;
+//     $("#searchModal").modal('hide');
+//     console.log("Hello!");
+//     // resultsBox.innerHTML = "";
+//     weatherFetch();
+//     })
+
+
 
 // Event Variables
 searchBtn.addEventListener('click',function () {
