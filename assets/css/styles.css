@@ -16,6 +16,16 @@ header {
     color: red;
 }
 
+.history-select:hover > .primary {
+    background-color:darkblue;
+    color:antiquewhite;
+}
+
+.history-select:hover > .secondary {
+    background-color: white;
+    color: red;
+}
+
 .primary {
     background-color:cadetblue;
 }
