@@ -12,23 +12,25 @@
     <header>
         <h1>Weather, Tis Nobler in the Mind to Suffer?</h1>
     </header>
-    <main class="container row">
-        <section class="col" id="left-block">
-            <article class="col">
-                <input type="search" name="City" id="city-name">
-                <button type="button" class="btn btn-primary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
+    <main>
+        <section class="container row" id="view-block">
+        <section class="col-5" id="left-block">
+            <article class="col input-group">
+                <input type="search" name="City" class="form-control" id="city-name" placeholder="Enter city name">
+                <button type="button" class="btn btn-outline-primary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
                 <!-- <button type="button" class="btn btn-primary" id="city-submit">Search</button> -->
                 <!-- Modal for search results if looking for a city? -->
             </article>
             <article id="history" class="col"></article>
         </section>
-        <section class="col" id="main-block">
+        <section class="col-7" id="main-block">
             <article id="current-temp" class="row">
             </article>
             <article id="future-temp" class="row"></article>
         </section>
-        <div class="modal fade container col-5" id="searchModal" tabindex="-1">
-            <div class="modal-dialog">
+        </section>
+        <div class="modal fade container" id="searchModal" tabindex="-1">
+            <div class="modal-dialog pe-auto">
                 <div class="modal-header bg-secondary">
                     <h5 class="modal-title">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

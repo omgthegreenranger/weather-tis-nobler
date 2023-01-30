@@ -53,10 +53,10 @@ function modalDisplay(searched) {
         resultsBox.innerHTML += `<div class="result-details"  data-bs-toggle="modal" data-bs-target="#searchModal"><ul class="results list-group">
         <li class="city primary list-group-item">City: ${cityName}</li><li class="city list-group-item">Province: ${cityState}</li><li class="city secondary list-group-item">Country: ${cityCountry}</li><li class="city secondary list-group-item">Lattitude: ${cityCoordLat}</li><li class="city secondary list-group-item">Longitude: ${cityCoordLon}</li><button type="button" class="citySelect btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>`;
     };
-    let selectBtn = document.querySelector('.citySelect');
-    selectBtn.addEventListener('click', function(event) {
+
+    resultsBox.addEventListener('click', function(event) {
         // $('#results-box').click(function(event) { 
-            weatherFetched = event.target.parent();
+            weatherFetched = event.target;
             $("#searchModal").modal('hide');
             console.log(weatherFetched);
             // resultsBox.innerHTML = "";
