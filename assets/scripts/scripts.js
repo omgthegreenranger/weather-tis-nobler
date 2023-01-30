@@ -1,7 +1,7 @@
 let openWeatherUrl = 'https://api.openweathermap.org/';
 let apiKey = 'f0d5b36ac524cd99787b1fffeaf83c0d';
 let damnThing = '';
-let searchHistory = localStorage.search-history ? JSON.parse(localStorage.seach-history) : [];
+let searchHistory = localStorage.getItem("search-history") ? JSON.parse(localStorage.getItem("search-history")) : [];
 
 
 //weather variables
@@ -14,7 +14,7 @@ let weatherNowUrl = 'data/2.5/weather?';
 let weatherNowFetchUrl = "";
 let weathersNow = [];
 let weathersToCome = [];
-let weatherFetched = [];
+let weatherFetched = "";
 let dayTime = '';
 let forecastFiveGlobe = [];
 let tomorrow = '';
@@ -45,8 +45,11 @@ function geoFetch (geoCity) {
 function modalDisplay(data) {
     searched = data;
     for (let i = 0; i < searched.length; i++) {
-        resultsBox.innerHTML += `<div class="result-details row" data-bs-toggle="modal" data-bs-target="#searchModal" data-backdrop="static">
-        <div class="city primary col-11 text-center" id="${i}">${searched[i]['name']}, ${searched[i]['state']}, ${searched[i]['country']}</div><div class="city secondary col-1" data-bs-dismiss="modal" aria-label="Close"><</div></div>`;
+        resultsBox.innerHTML += `
+        <div class="result-details row" data-bs-toggle="modal" data-bs-target="#searchModal" data-backdrop="static">
+        <div class="city primary col-11 text-center" id="${i}">${searched[i]['name']}, ${searched[i]['state']}, ${searched[i]['country']}</div>
+        <div class="city secondary col-1" data-bs-dismiss="modal" aria-label="Close"><</div>
+        </div>`;
     };
 };
 
@@ -57,31 +60,39 @@ function init() {
 init();
 
 function renderHistory() {
-    let weatherArray = {"name": weatherFetched.name,"lat": weatherFetched.lat,"lon": weatherFetched.lon}
-    if (weatherArray.name) {
-    searchHistory.push(weatherArray)};
-    localStorage.setItem("search-history", JSON.stringify(searchHistory));
+    // console.log(searchHistory.length);
+    if(weatherFetched) {
+        let weatherArray = {"name": weatherFetched.name,"lat": weatherFetched.lat,"lon": weatherFetched.lon}
+        searchHistory.push(weatherArray);
+        localStorage.setItem("search-history", JSON.stringify(searchHistory));
+    }
+    if(searchHistory.length > null) {
     historyBox.innerHTML = "";
     for (i = 0; i < searchHistory.length; i++) {
         if(searchHistory[i]['name']) {
-                historyBox.innerHTML += `<div class="history-select row"><div class="primary text-center col-11" id="${i}">${searchHistory[i]['name']}</div><div class="secondary col-1"><</div></div>`
+                historyBox.innerHTML += `
+                <div class="history-select row col-12">
+                <div class="secondary col-1">></div>
+                <div class="primary text-center col-11" id="${i}">${searchHistory[i]['name']}</div>
+                </div>`
         }
-        
     }
-    historyBox.addEventListener('click', function(event) {
-        console.log("running!");
-        weatherFetched = searchHistory[event.target.id];
-        renderHistory();
-        weatherFetch();
-        })
+    }
 }
 
+
+historyBox.addEventListener('click', function(event) {
+    console.log("running!");
+    weatherFetched = searchHistory[event.target.id];
+    renderHistory();
+    weatherFetch();
+    });
 
 resultsBox.addEventListener('click', function(event) {
     weatherFetched = searched[event.target.id];
     resultsBox.innerHTML = undefined;
-    renderHistory();
     weatherFetch();
+    renderHistory();
     });
 
 function weatherFetch () {
@@ -102,9 +113,17 @@ function deployWeathersNow(weathersNow) {
     let nowTemp = (weathersNow['main']['temp'] - 273.15).toFixed(1);
     let skiesNow = weathersNow['weather'][0]['main'];
     let feelsLike = (weathersNow['main']['feels_like'] - 273.15).toFixed(1);
-    document.querySelector('#current-temp').innerHTML = `<div id="current-city">${city}</div>
-    <div id="temps"><span id='now-temp'>${nowTemp}</span><span id="feels-like">${feelsLike}</span></div>
-    <div id="climate"><span id="skies-now">${skiesNow}</span></div>`
+    let windSpeed = (weathersNow['wind']['speed'] * 3.6).toFixed(1);
+    
+    document.querySelector('#current-temp').innerHTML = `
+    <div id="current-city row col-10">${city}</div>
+    <div class="row" id="stats">
+    <div id="now-temp">Current Temperature: <span id='now-temp'>${nowTemp}°C</span></div>
+    <div id="feels-temp">Feels like:<span id="feels-like">${feelsLike}°C</span></div>
+    <div id="winds"><span id="wind-speed">${windSpeed}</span>km/h</div>
+    <div id="climate"><span id="skies-now">${skiesNow}</span></div>
+    </div>`;
+
     console.log("Now data!");
     console.log(weathersNow);
 };
@@ -138,10 +157,18 @@ function deployWeathersToCome(weathersToCome) {
         forecastDate = dayjs.unix(forecastFive[i]['dt']).format("MMM DD, YYYY");
         forecastTemp = (forecastFive[i]['main']['temp'] - 273.15).toFixed(2);
         forecastSkies = forecastFive[i]['weather'][0]['main'];
-        forecastWind = forecastFive[i]['wind']['speed'];
+        forecastWind = (forecastFive[i]['wind']['speed'] * 3.6).toFixed(1);
         forecastFeels = (forecastFive[i]['main']['feels_like'] - 273.15).toFixed(2);
         forecastHumidity = forecastFive[i]['main']['humidity'];
-        document.querySelector('#future-temp').innerHTML += `<div class="forecastBox col cols-2"><div class="future-date">${forecastDate}</div><div class="future-skies">${forecastSkies}</div><div class="future-temp">${forecastTemp}</div><div class="future-wind">${forecastWind}<span class="future-feels">Feels like ${forecastFeels}</span></div><div class="future-humidity">${forecastHumidity}</div></div>`
+        document.querySelector('#future-temp').innerHTML += `
+        <div class="forecastBox card col">
+            <div class="future-date card">${forecastDate}</div>
+            <div class="future-skies">${forecastSkies}</div>
+            <div class="future-temp">Temperature: ${forecastTemp}°C</div>
+            <div class="future-wind">Wind Speed: ${forecastWind}km/h</div>
+            <div class="future-feels">Feels like: ${forecastFeels}°C</div>
+            <div class="future-humidity">Humidity: ${forecastHumidity}%</div>
+            </div>`
     };
     forecastFive = undefined;
 };
@@ -154,5 +181,4 @@ searchBtn.addEventListener('click',function (event) {
     event.target.previousElementSibling.value = "";
     resultsBox.innerHTML = "";
     geoFetch(searchTerm);
-    searchTerm = undefined;
 });

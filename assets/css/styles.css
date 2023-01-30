@@ -1,9 +1,110 @@
 body {
     background-color: darkgray;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header {
     background: linear-gradient(green, white);
+    text-align: center;
+    padding: 25px 15px 15px 15px;
+}
+
+header h1 {
+    font-family: 'Aguafina Script', cursive;
+    font-size: 300%;
+
+}
+
+main {
+
+}
+
+/* search/history classes */
+
+#left-block {
+
+}
+
+#search-box {
+
+}
+
+#history-title {
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 3px solid black;
+
+}
+
+#history {
+
+}
+
+/* Primary weather display block */
+
+#view-block {
+
+}
+
+/* Weather Display block */
+
+#main-block {
+
+}
+
+#current-temp {
+    /* border: 1px solid black; */
+    background-color: skyblue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#current-city {
+    font-weight: bolder;
+    font-size: 150%
+}
+
+#temps {
+
+}
+
+#climate {
+
+}
+
+/* 5-day forecast */
+#future-temp {
+    /* border: 1px solid blue; */
+
+}
+
+.forecastBox {
+    border: 1px dashed yellow;
+    background-color: grey;
+}
+
+.future-date {
+
+}
+
+.future-skies {
+
+}
+
+.future-temp {
+
+}
+
+.future-wind {
+
+}
+
+.future-feels {
+
+}
+
+.future-humidity {
+
 }
 
 .result-details:hover > .primary {
@@ -35,37 +136,8 @@ header {
     color: white;
 }
 
-.result-details {
-    border: 1px solid black;
+.result-details, .history-select {
+    /* border: 1px solid black; */
     padding: 3px;
     border-spacing: 4px;
-}
-#current-temp {
-    border: 1px solid black;
-    background-color: skyblue;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-#current-city {
-    font-weight: bolder;
-    font-size: 150%
-}
-
-#temps {
-
-}
-
-#climate {
-
-}
-
-#future-temp {
-    border: 1px solid blue;
-
-}
-
-.forecastBox {
-    border: 1px dashed yellow;
-    background-color: grey;
 }
