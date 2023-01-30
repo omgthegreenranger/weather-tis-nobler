@@ -6,14 +6,24 @@ header {
     background: linear-gradient(green, white);
 }
 
-/* 
-/* .result {
-    background-color: blue;
+.result-details:hover > .primary {
+    background-color:darkblue;
+    color:antiquewhite;
 }
-.result:nth-child(even) {
-    background-color:grey;
 
-} */ 
+.result-details:hover > .secondary {
+    background-color: white;
+    color: red;
+}
+
+.primary {
+    background-color:cadetblue;
+}
+
+.secondary {
+    background-color: red;
+    color: white;
+}
 
 .result-details {
     border: 1px solid black;
@@ -25,6 +35,19 @@ header {
     background-color: skyblue;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+#current-city {
+    font-weight: bolder;
+    font-size: 150%
+}
+
+#temps {
+
+}
+
+#climate {
+
 }
 
 #future-temp {

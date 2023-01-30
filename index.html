@@ -12,24 +12,22 @@
     <header>
         <h1>Weather, Tis Nobler in the Mind to Suffer?</h1>
     </header>
-    <main>
-        <section class="container row" id="view-block">
-        <section class="col-5" id="left-block">
-            <article class="col input-group">
-                <input type="search" name="City" class="form-control" id="city-name" placeholder="Enter city name">
-                <button type="button" class="btn btn-outline-primary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
-                <!-- <button type="button" class="btn btn-primary" id="city-submit">Search</button> -->
-                <!-- Modal for search results if looking for a city? -->
-            </article>
-            <article id="history" class="col"></article>
+    <main class="container-fluid">
+        <section class="row mx-auto" id="view-block">
+            <section class="col-md-3" id="left-block">
+                <article class="col input-group">
+                    <input type="search" name="City" class="form-control" id="city-name" placeholder="Enter city name">
+                    <button type="button" class="btn btn-outline-primary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
+                </article>
+                <article id="history" class="col"></article>
+            </section>
+            <section class="col-md-9" id="main-block">
+                <article id="current-temp" class="row">
+                </article>
+                <article id="future-temp" class="row"></article>
+            </section>
         </section>
-        <section class="col-7" id="main-block">
-            <article id="current-temp" class="row">
-            </article>
-            <article id="future-temp" class="row"></article>
-        </section>
-        </section>
-        <div class="modal fade container" id="searchModal" tabindex="-1">
+        <div class="modal fade" id="searchModal" tabindex="-1">
             <div class="modal-dialog pe-auto">
                 <div class="modal-header bg-secondary">
                     <h5 class="modal-title">Modal title</h5>
@@ -41,14 +39,9 @@
                     </section>
                 </div>
                 <div class="modal-footer bg-secondary">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button> -->
                 </div>
             </div>
         </div>
-        <!-- <div class="modal fade" id="searchModal" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">Hello!</div>
-        </div> -->
     </main>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
