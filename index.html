@@ -22,13 +22,15 @@
                     <input type="search" name="City" class="form-control" id="city-name" placeholder="Enter city name">
                     <button type="button" class="btn btn-outline-primary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
                 </article>
-                <article id="history-title" class="col-10">Previous Searches</article>
-                <div id="history" class="card align-items-center col-10"></div>
+                <article id="history-block" class="col-10">
+                    <div id="history-title" class="col-10">Previous Searches</div>
+                    <div id="history" class="card align-items-center col-12"></div>
+                </article>
             </section>
             <section class="col-md-9" id="main-block">
                 <article id="current-temp" class="row col-10">
                 </article>
-                <article id="future-temp" class="row col-10"></article>
+                <article id="future-temp" class="row h-75 col-10"></article>
             </section>
         </section>
         <div class="modal fade" id="searchModal" tabindex="-1">

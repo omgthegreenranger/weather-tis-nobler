@@ -60,11 +60,31 @@ function init() {
 init();
 
 function renderHistory() {
+    let add = '';
     // console.log(searchHistory.length);
     if(weatherFetched) {
-        let weatherArray = {"name": weatherFetched.name,"lat": weatherFetched.lat,"lon": weatherFetched.lon}
-        searchHistory.push(weatherArray);
-        localStorage.setItem("search-history", JSON.stringify(searchHistory));
+        let weatherArray = {"name": weatherFetched.name,"lat": weatherFetched.lat,"lon": weatherFetched.lon};
+        if (searchHistory.length == 0) {
+            searchHistory.push(weatherArray);
+            localStorage.setItem("search-history", JSON.stringify(searchHistory));
+        } else {
+            for (i = 0; i < searchHistory.length; i++) {
+                if (JSON.stringify(weatherArray) == JSON.stringify(searchHistory[i])) {
+                    add = false;
+                    break;
+                } else {
+                    console.log("Works!")
+                    add = true;
+                };
+            };
+            if(add) {
+                searchHistory.push(weatherArray);
+                localStorage.setItem("search-history", JSON.stringify(searchHistory));
+            } else { 
+                return;
+            };
+            
+        }
     }
     if(searchHistory.length > null) {
     historyBox.innerHTML = "";
@@ -116,12 +136,13 @@ function deployWeathersNow(weathersNow) {
     let windSpeed = (weathersNow['wind']['speed'] * 3.6).toFixed(1);
     
     document.querySelector('#current-temp').innerHTML = `
-    <div id="current-city row col-10">${city}</div>
+    <div class="row">
+        <div id="current-city col-5"><h5>${city}</h5></div><div id="climate" class="col-5"><span id="skies-now">${skiesNow}</span></div>
+        </div>
     <div class="row" id="stats">
-    <div id="now-temp">Current Temperature: <span id='now-temp'>${nowTemp}°C</span></div>
-    <div id="feels-temp">Feels like:<span id="feels-like">${feelsLike}°C</span></div>
-    <div id="winds"><span id="wind-speed">${windSpeed}</span>km/h</div>
-    <div id="climate"><span id="skies-now">${skiesNow}</span></div>
+        <div id="now-temp" class="col-3">Current Temperature: <span id='now-temp'>${nowTemp}°C</span></div>
+        <div id="feels-temp" class="col-3">Feels like:<span id="feels-like">${feelsLike}°C</span></div>
+        <div id="winds" class="col-3"><span id="wind-speed">${windSpeed}</span>km/h</div>
     </div>`;
 
     console.log("Now data!");
@@ -162,7 +183,7 @@ function deployWeathersToCome(weathersToCome) {
         forecastHumidity = forecastFive[i]['main']['humidity'];
         document.querySelector('#future-temp').innerHTML += `
         <div class="forecastBox card col">
-            <div class="future-date card">${forecastDate}</div>
+            <div class="future-date">${forecastDate}</div>
             <div class="future-skies">${forecastSkies}</div>
             <div class="future-temp">Temperature: ${forecastTemp}°C</div>
             <div class="future-wind">Wind Speed: ${forecastWind}km/h</div>

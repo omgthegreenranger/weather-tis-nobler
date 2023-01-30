@@ -16,28 +16,35 @@ header h1 {
 }
 
 main {
-
+    padding: 10px;
 }
 
 /* search/history classes */
 
 #left-block {
-
+    
 }
 
 #search-box {
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 4px;
+}
 
+#history-block {
+    font-weight: bolder;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 2px;
 }
 
 #history-title {
-    font-weight: bolder;
-    text-align: center;
-    margin-top: 3px solid black;
-
+    
 }
 
 #history {
-
+    
 }
 
 /* Primary weather display block */
@@ -59,7 +66,7 @@ main {
     border-top-right-radius: 10px;
 }
 
-#current-city {
+.current-city {
     font-weight: bolder;
     font-size: 150%
 }
