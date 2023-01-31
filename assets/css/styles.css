@@ -12,13 +12,14 @@ header {
     background: linear-gradient(black, var(--c-grey));
     text-align: center;
     padding: 25px 15px 15px 15px;
+    margin: auto;
 }
 
 header h1 {
     font-family: 'Aguafina Script', cursive;
     font-size: 300%;
     color: white;
-
+    padding-top: 10px;
 }
 
 main {
@@ -26,10 +27,6 @@ main {
 }
 
 /* search/history classes */
-
-#left-block {
-    
-}
 
 #search-box {
     border: 1px solid black;
@@ -46,17 +43,9 @@ main {
 }
 
 #history-title {
-    
-}
-
-#history {
-    
-}
-
-/* Primary weather display block */
-
-#view-block {
-
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+    font-size: 36px;
 }
 
 /* Weather Display block */
@@ -76,11 +65,22 @@ main {
 
 #current-city {
     font-weight: bolder;
+}
+
+h5 {
+    border-bottom: 5px solid var(--s-grey);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 200%;
+}
+
+.temp-header {
+    font-family: 'Bebas Neue', cursive;
     font-size: 150%;
 }
 
 #climate {
     color: white;
+    text-align: center;
 }
 
 #five-day-title-bar {
@@ -90,9 +90,9 @@ main {
 
 #five-day-title {
     font-weight: bolder;
+    font-family: 'Bebas Neue', cursive;
     font-size: 200%;
-    color: var(--c-grey);
-    text-shadow: 0 0 1px black;
+    color: rgb(39, 39, 39);
     align-self:center;
     border-bottom: 5px solid var(--c-grey);
 }
@@ -112,10 +112,6 @@ main {
 }
 
 /* 5-day forecast */
-#future-temp {
-    /* border: 1px solid blue; */
-
-}
 
 .forecastBox {
     background: linear-gradient(var(--c-grey), var(--s-grey) 10%);
@@ -127,30 +123,29 @@ main {
     background-color: grey;
     border-radius: 5px;
     text-align: center;
-
+    font-family: 'Bebas Neue', cursive;
+    font-size: larger;
 }
 
-.future-skies {
+.forecast-text {
+    font-weight: bolder;
+    font-size: 200%;
+}
+
+#forecast-header {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 125%;
+    text-decoration: none;
 }
 
 .future-temp, .future-wind, .future-feels, .future-humidity {
-    border: 1px solid black;
+    border-top: 1px solid black;
     text-align: center;
     align-content:center;
-    padding-top: auto;
-    padding-bottom: auto;
 }
 
-.future-wind {
-
-}
-
-.future-feels {
-
-}
-
-.future-humidity {
-
+.future-skies {
+    text-align:center;
 }
 
 .result-details:hover > .primary {
@@ -188,3 +183,9 @@ main {
     padding: 3px;
     border-spacing: 4px;
 }
+
+@media only screen and (max-width: 768px) {
+    .forecast-text, .temp-header {
+        font-size:100%;
+    }
+  }
