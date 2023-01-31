@@ -1,1 +1,191 @@
+:root {
+    --c-grey: #6c757d;
+    --s-grey: #8a97a3;
+}
 
+body {
+    background-color: darkgray;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+    background: linear-gradient(black, var(--c-grey));
+    text-align: center;
+    padding: 25px 15px 15px 15px;
+    margin: auto;
+}
+
+header h1 {
+    font-family: 'Aguafina Script', cursive;
+    font-size: 300%;
+    color: white;
+    padding-top: 10px;
+}
+
+main {
+    padding: 10px;
+}
+
+/* search/history classes */
+
+#search-box {
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+#history-block {
+    font-weight: bolder;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+#history-title {
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+    font-size: 36px;
+}
+
+/* Weather Display block */
+
+#main-block {
+    visibility: hidden;
+}
+
+#current-temp {
+    border: 1px solid black;
+    background: linear-gradient(black, var(--c-grey));
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    padding: 10px;
+}
+
+#current-city {
+    font-weight: bolder;
+}
+
+h5 {
+    border-bottom: 5px solid var(--s-grey);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 200%;
+}
+
+.temp-header {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 150%;
+}
+
+#climate {
+    color: white;
+    text-align: center;
+}
+
+#five-day-title-bar {
+    align-items: center;
+
+}
+
+#five-day-title {
+    font-weight: bolder;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 200%;
+    color: rgb(39, 39, 39);
+    align-self:center;
+    border-bottom: 5px solid var(--c-grey);
+}
+
+#now-temp,#winds,#feels-temp, #humid {
+    align-content:center;
+
+}
+
+#now-temp,#winds,#feels-temp, #humid
+ span {
+    text-align: center;
+}
+
+#now-tempra, #wind-speed, #feels-like, #humid-now {
+    font-size: 150%;
+}
+
+/* 5-day forecast */
+
+.forecastBox {
+    background: linear-gradient(var(--c-grey), var(--s-grey) 10%);
+}
+
+.future-date {
+    padding: 3px;
+    color: white;
+    background-color: grey;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    font-size: larger;
+}
+
+.forecast-text {
+    font-weight: bolder;
+    font-size: 200%;
+}
+
+#forecast-header {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 125%;
+    text-decoration: none;
+}
+
+.future-temp, .future-wind, .future-feels, .future-humidity {
+    border-top: 1px solid black;
+    text-align: center;
+    align-content:center;
+}
+
+.future-skies {
+    text-align:center;
+}
+
+.result-details:hover > .primary {
+    background: linear-gradient(-.25turn, black, var(--c-grey));
+    color:antiquewhite;
+}
+
+.result-details:hover > .secondary {
+    background-color: var(--c-grey);
+    color: black;
+}
+
+.history-select:hover > .primary {
+    background: linear-gradient(-.25turn, black, var(--c-grey));
+    color:antiquewhite;
+}
+
+.history-select:hover > .secondary {
+    background-color: var(--c-grey);
+    color: black;
+}
+
+.primary {
+    background: linear-gradient(.25turn, black, var(--c-grey));
+    color: white;
+}
+
+.secondary {
+    background-color: black;
+    color: white;
+}
+
+.result-details, .history-select {
+    /* border: 1px solid black; */
+    padding: 3px;
+    border-spacing: 4px;
+}
+
+@media only screen and (max-width: 768px) {
+    .forecast-text, .temp-header {
+        font-size:100%;
+    }
+  }
