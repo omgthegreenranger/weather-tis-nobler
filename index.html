@@ -20,36 +20,38 @@
             <section class="col-md-3" id="left-block">
                 <article class="search-box col input-group my-3" id="search-box">
                     <input type="search" name="City" class="form-control" id="city-name" placeholder="Enter city name">
-                    <button type="button" class="btn btn-outline-primary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
+                    <button type="button" class="btn btn-secondary" id="city-submit" data-bs-toggle="modal" data-bs-target="#searchModal">Search</button>
                 </article>
                 <article id="history-block" class="col-10">
                     <div id="history-title" class="col-10">Previous Searches</div>
                     <div id="history" class="card align-items-center col-12"></div>
                 </article>
             </section>
-            <section class="col-md-9" id="main-block">
+            <section class="col-md-9 g-3" id="main-block">
                 <article id="current-temp" class="row col-10">
                 </article>
-                <article id="future-temp" class="row h-75 col-10"></article>
+                <div id="five-day-title-bar" class="col-10 my-2"><div id="five-day-title" class="col-12">5-day Forecast</div></div>
+                <article id="future-temp" class="row h-75 my-2 col-10"></article>
             </section>
         </section>
         <div class="modal fade" id="searchModal" tabindex="-1">
             <div class="modal-dialog pe-auto">
-                <div class="modal-header bg-secondary">
-                    <h5 class="modal-title">Modal title</h5>
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title">Select from search results:</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body bg-success-subtle">
+                <div class="modal-body bg-secondary-subtle">
                     <section id="results-box">
             
                     </section>
                 </div>
-                <div class="modal-footer bg-secondary">
+                <div class="modal-footer bg-dark">
                 </div>
             </div>
         </div>
     </main>
 </body>
+<script src="https://kit.fontawesome.com/83acaf7ad8.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/utc.js"></script>
 <script>dayjs.extend(window.dayjs_plugin_utc)</script>

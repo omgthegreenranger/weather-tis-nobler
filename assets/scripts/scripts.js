@@ -18,7 +18,7 @@ let weatherFetched = "";
 let dayTime = '';
 let forecastFiveGlobe = [];
 let tomorrow = '';
-
+let weatherIcon = "http://openweathermap.org/img/wn/";
 
 // Geocoding variables
 let geoUrl = "geo/1.0/direct?";
@@ -47,8 +47,8 @@ function modalDisplay(data) {
     for (let i = 0; i < searched.length; i++) {
         resultsBox.innerHTML += `
         <div class="result-details row" data-bs-toggle="modal" data-bs-target="#searchModal" data-backdrop="static">
-        <div class="city primary col-11 text-center" id="${i}">${searched[i]['name']}, ${searched[i]['state']}, ${searched[i]['country']}</div>
-        <div class="city secondary col-1" data-bs-dismiss="modal" aria-label="Close"><</div>
+            <div class="city secondary col-1" data-bs-dismiss="modal" aria-label="Close">></div>
+            <div class="city primary col-11 text-center" id="${i}">${searched[i]['name']}, ${searched[i]['state']}, ${searched[i]['country']}</div>
         </div>`;
     };
 };
@@ -104,6 +104,7 @@ function renderHistory() {
 historyBox.addEventListener('click', function(event) {
     console.log("running!");
     weatherFetched = searchHistory[event.target.id];
+    document.getElementById("main-block").setAttribute("style", "visibility: visible");
     renderHistory();
     weatherFetch();
     });
@@ -111,6 +112,7 @@ historyBox.addEventListener('click', function(event) {
 resultsBox.addEventListener('click', function(event) {
     weatherFetched = searched[event.target.id];
     resultsBox.innerHTML = undefined;
+    document.getElementById("main-block").setAttribute("style", "visibility: visible");
     weatherFetch();
     renderHistory();
     });
@@ -131,18 +133,22 @@ function weatherFetch () {
 function deployWeathersNow(weathersNow) {
     let city = weathersNow['name'];
     let nowTemp = (weathersNow['main']['temp'] - 273.15).toFixed(1);
-    let skiesNow = weathersNow['weather'][0]['main'];
+    let skiesNow = weathersNow['weather'][0]['description'];
+    let skiesIcon = weatherIcon + weathersNow['weather'][0]['icon'] + "@2x.png";
     let feelsLike = (weathersNow['main']['feels_like'] - 273.15).toFixed(1);
     let windSpeed = (weathersNow['wind']['speed'] * 3.6).toFixed(1);
-    
+    let humidNow = (weathersNow['main']['humidity']);
+
     document.querySelector('#current-temp').innerHTML = `
     <div class="row">
-        <div id="current-city col-5"><h5>${city}</h5></div><div id="climate" class="col-5"><span id="skies-now">${skiesNow}</span></div>
+        <div id="current-city col-5"><h5>${city}</h5></div>
         </div>
     <div class="row" id="stats">
-        <div id="now-temp" class="col-3">Current Temperature: <span id='now-temp'>${nowTemp}°C</span></div>
-        <div id="feels-temp" class="col-3">Feels like:<span id="feels-like">${feelsLike}°C</span></div>
-        <div id="winds" class="col-3"><span id="wind-speed">${windSpeed}</span>km/h</div>
+        <div id="climate" class="col-1"><img src=${skiesIcon}><span id="skies-now">${skiesNow}</span></div>
+        <div id="now-temp" class="row col-3 align-middle"><span class="align-middle">Current Temperature:</span> <span id="now-tempra" class="align-middle">${nowTemp}°C</span></div>
+        <div id="winds" class="row col-3 align-middle"><span>Wind Speed</span><span id="wind-speed">${windSpeed}km/h</span></div>
+        <div id="feels-temp" class="row col-3 align-middle"><span>Feels like:</span><span id="feels-like">${feelsLike}°C</span></div>
+        <div id="humid" class="row col-3 align-middle"><span>Humidity:</span><span id="humid-now">${humidNow}</span></div>
     </div>`;
 
     console.log("Now data!");
@@ -177,19 +183,24 @@ function deployWeathersToCome(weathersToCome) {
     for (i = 0; i < forecastFive.length; i++) {
         forecastDate = dayjs.unix(forecastFive[i]['dt']).format("MMM DD, YYYY");
         forecastTemp = (forecastFive[i]['main']['temp'] - 273.15).toFixed(2);
-        forecastSkies = forecastFive[i]['weather'][0]['main'];
+        forecastSkies = forecastFive[i]['weather'][0]['description'];
         forecastWind = (forecastFive[i]['wind']['speed'] * 3.6).toFixed(1);
         forecastFeels = (forecastFive[i]['main']['feels_like'] - 273.15).toFixed(2);
         forecastHumidity = forecastFive[i]['main']['humidity'];
+        futureIcon = weatherIcon + forecastFive[i]['weather'][0]['icon'] + "@2x.png";
         document.querySelector('#future-temp').innerHTML += `
-        <div class="forecastBox card col">
-            <div class="future-date">${forecastDate}</div>
-            <div class="future-skies">${forecastSkies}</div>
-            <div class="future-temp">Temperature: ${forecastTemp}°C</div>
-            <div class="future-wind">Wind Speed: ${forecastWind}km/h</div>
-            <div class="future-feels">Feels like: ${forecastFeels}°C</div>
-            <div class="future-humidity">Humidity: ${forecastHumidity}%</div>
-            </div>`
+        <div class="forecastBox card mx-1 col">
+            <div class="card-body">
+                <div class="future-date card-title">${forecastDate}</div>
+                <div class="future-skies col-12 justify-content-middle"><img src=${futureIcon}><div>${forecastSkies}</div></div>
+                <div class="temp-box row my-3 g-4">
+                    <div class="future-temp col-6">Temp.: ${forecastTemp}°C</div>
+                    <div class="future-wind col-6">Wind: ${forecastWind}km/h</div>
+                    <div class="future-feels col-6">Feels like: ${forecastFeels}°C</div>
+                    <div class="future-humidity col-6">Humidity: ${forecastHumidity}%</div>
+                </div>
+            </div>
+        </div>`
     };
     forecastFive = undefined;
 };
